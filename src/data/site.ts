@@ -1,14 +1,14 @@
 // Dane wspólne dla całej strony.
-// Pozycje oznaczone TODO czekają na potwierdzenie (lista w CONTENT-TODO.md).
+// Dane potwierdzone 2026-11-21 (lista w CONTENT-TODO.md).
 
 export const site = {
   name: 'óSemka',
   tagline: 'Wyprawy żeglarskie na stalowym jachcie',
-  email: 'kontakt@osemka.info', // TODO: potwierdzić adres skrzynki
-  phone: '', // TODO: numer telefonu kapitana (opcjonalnie)
-  company: 'óSemka', // TODO: pełna nazwa firmy z CEIDG
-  nip: '', // TODO: NIP z CEIDG
-  homePort: 'Gdańsk', // TODO: potwierdzić port macierzysty
+  email: 'kapitan@osemka.info',
+  phone: '', // bez telefonu na stronie
+  company: 'óSemka Semko Doktór', // nazwa z CEIDG
+  nip: '529-146-55-73',
+  homePort: 'Hel',
 };
 
 export const yacht = {

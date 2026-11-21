@@ -3,18 +3,18 @@
 Wszystko poniżej jest na stronie jako tekst roboczy. Odhacz po sprawdzeniu.
 
 ## Dane firmy (`src/data/site.ts`)
-- [ ] adres e-mail kontaktowy (teraz `kontakt@osemka.info`)
-- [ ] telefon (opcjonalnie)
-- [ ] pełna nazwa firmy i NIP z CEIDG
-- [ ] port macierzysty (teraz Gdańsk)
+- [x] adres e-mail kontaktowy: `kapitan@osemka.info`
+- [x] telefon: bez telefonu na stronie
+- [x] nazwa i NIP z CEIDG: óSemka Semko Doktór, NIP 529-146-55-73
+- [x] port macierzysty: Hel
 
 ## Etapy 2027 (`src/content/etapy/`)
-- [ ] trasy (do zastąpienia Twoimi trasami marzeń)
-- [ ] terminy (teraz opisowe: „początek lipca 2027”)
-- [ ] ceny (teraz 3 200 zł – hipoteza z modelu `02-symulacja.xlsx`)
+- [x] trasy 2027 zatwierdzone
+- [x] terminy zatwierdzone
+- [x] ceny zatwierdzone (3 200 zł za koję)
 
 ## Kapitan (`src/pages/kapitan.astro`)
-- [ ] lista uprawnień (kapitan jachtowy, SRC, STCW, nurek ISSA)
+- [x] lista uprawnień: kapitan jachtowy, STCW, nurek ISSA (SRC usunięte)
 - [ ] akweny, po których prowadziłeś rejsy
 - [ ] zdanie o załogach, które wracają
 

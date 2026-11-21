@@ -6,7 +6,7 @@ compatibility_date = "2026-11-01"
 
 [vars]
 SITE_URL = "https://www.osemka.info"
-OWNER_EMAIL = "kontakt@osemka.info"   # TODO: adres, na który mają przychodzić zapytania
+OWNER_EMAIL = "kapitan@osemka.info"   # tu przychodzą zapytania ze strony
 BREVO_LIST_ID = ""                    # uzupełnimy po założeniu konta Brevo
 BREVO_DOI_TEMPLATE_ID = ""            # szablon maila potwierdzającego zapis
 
