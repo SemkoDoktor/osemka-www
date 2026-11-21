@@ -15,5 +15,5 @@ BREVO_DOI_TEMPLATE_ID = ""            # szablon maila potwierdzającego zapis
 [[d1_databases]]
 binding = "DB"
 database_name = "osemka"
-database_id = "00000000-0000-0000-0000-000000000000"  # podmienimy po `wrangler d1 create osemka`
+database_id = "66c66264-2041-4b8e-b3cb-1e3d33c370af"
 migrations_dir = "migrations"
