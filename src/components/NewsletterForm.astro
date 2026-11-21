@@ -1,0 +1,36 @@
+---
+// Zapis do „Dziennika pokładowego”. Wysyłka trafi do /api/newsletter
+// (funkcja Cloudflare + Brevo z podwójną zgodą – krok „formularze”).
+import { site } from '../data/site';
+interface Props { id: string; dark?: boolean }
+const { id, dark = false } = Astro.props;
+---
+<form class:list={['nl', { dark }]} action="/api/newsletter/" method="post" data-form="newsletter" data-event="newsletter_signup">
+  <div class="row">
+    <div class="field">
+      <label for={`${id}-email`}>Twój e-mail</label>
+      <input id={`${id}-email`} name="email" type="email" autocomplete="email" required />
+    </div>
+    <button class="btn" type="submit">Zapisz mnie</button>
+  </div>
+  <label class="check">
+    <input type="checkbox" name="zgoda" required />
+    <span>Chcę dostawać newsletter óSemki. Zgodę mogę wycofać w każdej chwili. Szczegóły w <a href="/polityka-prywatnosci/">polityce prywatności</a>.</span>
+  </label>
+  <div class="visually-hidden" aria-hidden="true"><label>Nie wypełniaj<input name="website" tabindex="-1" autocomplete="off" /></label></div>
+  <p class="form-msg" role="status" data-fallback={site.email}></p>
+</form>
+
+<style>
+  .row { display: flex; gap: 0.75rem; align-items: end; flex-wrap: wrap; }
+  .row .field { flex: 1 1 14rem; margin-bottom: 0; }
+  .row .btn { flex: none; }
+  .nl .check { margin-top: 0.9rem; }
+  .dark label { color: #e6edf1; }
+  .dark .check a { color: #f3b4d2; }
+</style>
+
+<script>
+  import { wireForms } from '../scripts/forms';
+  wireForms();
+</script>

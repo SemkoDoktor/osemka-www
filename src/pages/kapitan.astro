@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Kapitan" description="Semko, kapitan óSemki: żeglarz od liceum, motocyklista, informatyk. Uprawnienia kapitańskie, wieloletnie rejsy po Bałtyku, Morzu Śródziemnym i Karaibach.">
+  <section class="wrap hero">
+    <div class="photo-slot" style="--ratio: 4 / 5">Zdjęcie: kapitan przy sterze óSemki</div>
+    <div>
+      <h1>Semko</h1>
+      <p class="lead">Żegluję od liceum. Na co dzień pracuję w IT, gdzie od lat prowadzę zespoły i projekty. óSemka łączy jedno i drugie.</p>
+      <p>Prowadziłem załogi na Bałtyku, w Norwegii, Grecji, Chorwacji i na Karaibach. Wiele osób, które ze mną pływały, wraca na kolejne rejsy. Najbardziej lubię moment, w którym ktoś, kto pierwszego dnia bał się wejść na dziób, sam prowadzi nocną wachtę.</p>
+      <p>Poza morzem jeżdżę na wyprawy motocyklowe i pracuję w drewnie. Pamiątki, które dostajesz po etapie, powstają w mojej pracowni.</p>
+    </div>
+  </section>
+
+  <section class="section section--shoal">
+    <div class="wrap cols">
+      <div>
+        <h2>Uprawnienia</h2>
+        <ul class="list">
+          <li>kapitan jachtowy</li>
+          <li>świadectwo operatora radiowego SRC</li>
+          <li>przeszkolenie STCW</li>
+          <li>nurek ISSA</li>
+        </ul>
+        <p class="muted">Lista do potwierdzenia przed publikacją.</p>
+      </div>
+      <div>
+        <h2>Jak prowadzę rejs</h2>
+        <p>Spokojnie i konkretnie. Każdy wie, co robi i dlaczego. Bezpieczeństwo nie podlega dyskusji, a reszty uczymy się razem: kto chce, dostaje ster, mapę i odpowiedzialność.</p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: center;
+    padding-block: clamp(2rem, 6vw, 4.5rem);
+  }
+  .cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(2rem, 5vw, 4.5rem); }
+  .list { padding-left: 1.2rem; margin: 0 0 1rem; }
+  @media (max-width: 56rem) { .hero, .cols { grid-template-columns: 1fr; } .hero .photo-slot { max-width: 24rem; } }
+</style>

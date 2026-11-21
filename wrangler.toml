@@ -1,0 +1,19 @@
+# Konfiguracja Cloudflare Pages (strona + funkcje formularzy).
+name = "osemka-www"
+pages_build_output_dir = "./dist"
+compatibility_date = "2026-11-01"
+
+[vars]
+SITE_URL = "https://www.osemka.info"
+OWNER_EMAIL = "kontakt@osemka.info"   # TODO: adres, na który mają przychodzić zapytania
+BREVO_LIST_ID = ""                    # uzupełnimy po założeniu konta Brevo
+BREVO_DOI_TEMPLATE_ID = ""            # szablon maila potwierdzającego zapis
+
+# Sekret ustawiany poza repozytorium:
+#   npx wrangler pages secret put BREVO_API_KEY
+
+[[d1_databases]]
+binding = "DB"
+database_name = "osemka"
+database_id = "00000000-0000-0000-0000-000000000000"  # podmienimy po `wrangler d1 create osemka`
+migrations_dir = "migrations"

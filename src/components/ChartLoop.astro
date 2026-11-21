@@ -1,0 +1,89 @@
+---
+// Schematyczna mapa Wielkiej Pętli.
+// Pozycje portów policzone z prawdziwych współrzędnych w odwzorowaniu walcowym:
+//   x = (dł + 25) / 55 * 1000,   y = (72 - szer) / 19 * 620
+// Zakres: 25°W–30°E, 53°N–72°N. Trasy po sezonie 2027 to plan wstępny.
+const ports = [
+  { n: 'Gdańsk', x: 794, y: 576, dx: 14, dy: 32, home: true },
+  { n: 'Bornholm', x: 722, y: 552, dx: -112, dy: -12 },
+  { n: 'Visby', x: 787, y: 469, dx: 14, dy: 8 },
+  { n: 'Sztokholm', x: 783, y: 413, dx: -128, dy: -12 },
+  { n: 'Mariehamn', x: 817, y: 388, dx: 14, dy: -10 },
+  { n: 'Kilonia', x: 639, y: 577, dx: -92, dy: 30 },
+  { n: 'Bergen', x: 551, y: 379, dx: 14, dy: 28 },
+  { n: 'Lerwick', x: 434, y: 387, dx: -96, dy: 30 },
+  { n: 'Tórshavn', x: 332, y: 326, dx: -108, dy: -14 },
+  { n: 'Svolvær', x: 720, y: 123, dx: -100, dy: 8 },
+  { n: 'Honningsvåg', x: 927, y: 33, dx: -160, dy: 30 },
+  { n: 'Reykjavík', x: 56, y: 256, dx: 14, dy: 36 },
+];
+const lat = [54, 58, 62, 66, 70].map((v) => ({ v, y: ((72 - v) / 19) * 620 }));
+const lon = [-20, -10, 0, 10, 20].map((v) => ({ v, x: ((v + 25) / 55) * 1000 }));
+const soundings = [
+  [160, 420, '72'], [220, 520, '95'], [380, 470, '118'], [520, 520, '41'], [600, 250, '210'],
+  [470, 170, '1260'], [300, 120, '890'], [880, 520, '58'], [700, 480, '44'], [140, 330, '204'],
+  [860, 300, '33'], [640, 420, '96'], [560, 80, '2340'], [250, 400, '160'],
+];
+---
+<figure class="chart">
+  <svg viewBox="0 0 1000 620" role="img" aria-labelledby="chart-title chart-desc">
+    <title id="chart-title">Wielka Pętla óSemki</title>
+    <desc id="chart-desc">Mapa kursów: sezon 2027 na Bałtyku (Gdańsk, Bornholm, Sztokholm, Wyspy Alandzkie, Gotlandia), sezon 2028 na Morzu Północnym (Kilonia, Szetlandy, Wyspy Owcze, Bergen), sezon 2029 do Lofotów i Nordkappu, w dalszych planach Islandia.</desc>
+
+    <g class="grid">
+      {lat.map((l) => (<><line x1="0" x2="1000" y1={l.y} y2={l.y} /><text x="8" y={l.y - 8}>{l.v}°N</text></>))}
+      {lon.map((l) => (<><line y1="0" y2="620" x1={l.x} x2={l.x} /><text x={l.x + 6} y="610">{Math.abs(l.v)}°{l.v < 0 ? 'W' : l.v > 0 ? 'E' : ''}</text></>))}
+    </g>
+
+    <g class="soundings" aria-hidden="true">
+      {soundings.map(([x, y, d]) => <text x={x} y={y}>{d}</text>)}
+    </g>
+
+    <path class="leg leg-dream" d="M332 326 C 240 300, 130 270, 56 256" />
+    <path class="leg leg-2029" d="M551 379 C 600 300, 660 190, 720 123 C 790 80, 860 50, 927 33" />
+    <path class="leg leg-2028" d="M639 577 C 560 520, 470 440, 434 387 C 400 360, 360 340, 332 326 C 410 330, 490 360, 551 379" />
+    <path class="leg leg-2027" pathLength="1" d="M794 576 C 760 572, 735 566, 722 552 C 740 500, 765 450, 783 413 C 795 400, 806 392, 817 388 C 812 420, 795 445, 787 469 C 790 510, 795 545, 794 576" />
+
+    <g class="ports">
+      {ports.map((p) => (
+        <g>
+          <circle cx={p.x} cy={p.y} r={p.home ? 10 : 6.5} class={p.home ? 'home' : ''} />
+          <text x={p.x + p.dx} y={p.y + p.dy}>{p.n}</text>
+        </g>
+      ))}
+    </g>
+  </svg>
+  <figcaption>
+    <ul class="legend">
+      <li><span class="key k2027"></span>Sezon 2027: Bałtyk</li>
+      <li><span class="key k2028"></span>2028: Morze Północne</li>
+      <li><span class="key k2029"></span>2029: Lofoty i Nordkapp</li>
+      <li><span class="key kdream"></span>Dalej: Islandia</li>
+    </ul>
+  </figcaption>
+</figure>
+
+<style>
+  .chart { margin: 0; }
+  svg { width: 100%; background: var(--white); border: 1px solid var(--rule); }
+  .grid line { stroke: var(--rule); stroke-width: 1; opacity: 0.6; }
+  .grid text { font-family: var(--font-display); font-stretch: 80%; font-size: 17px; fill: var(--steel); }
+  .soundings text { font-family: var(--font-text); font-style: italic; font-size: 15px; fill: #8aa0ad; }
+  .leg { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .leg-2027 { stroke: var(--magenta); stroke-width: 5; stroke-dasharray: 1; stroke-dashoffset: 1; animation: plot 2.4s 0.3s cubic-bezier(.45,.05,.3,1) forwards; }
+  .leg-2028 { stroke: var(--ink); stroke-width: 2.5; stroke-dasharray: 10 7; }
+  .leg-2029 { stroke: var(--ink); stroke-width: 2; stroke-dasharray: 3 6; }
+  .leg-dream { stroke: var(--steel); stroke-width: 1.5; stroke-dasharray: 2 7; }
+  .ports circle { fill: var(--white); stroke: var(--ink); stroke-width: 2; }
+  .ports circle.home { fill: var(--magenta); stroke: var(--magenta); }
+  .ports text { font-family: var(--font-text); font-style: italic; font-size: 25px; fill: var(--ink); paint-order: stroke; stroke: var(--white); stroke-width: 6px; }
+  @keyframes plot { to { stroke-dashoffset: 0; } }
+  @media (prefers-reduced-motion: reduce) { .leg-2027 { stroke-dashoffset: 0; } }
+
+  .legend { list-style: none; margin: 0.7rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; font-size: var(--step--1); color: var(--steel); }
+  .legend li { display: flex; align-items: center; gap: 0.5rem; }
+  .key { width: 2.2rem; height: 0; border-top: 3px solid var(--magenta); }
+  .k2028 { border-top: 2.5px dashed var(--ink); }
+  .k2029 { border-top: 2px dotted var(--ink); }
+  .kdream { border-top: 2px dotted var(--steel); }
+</style>

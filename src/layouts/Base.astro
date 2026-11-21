@@ -1,0 +1,50 @@
+---
+import '@fontsource-variable/archivo/wdth.css';
+import '@fontsource-variable/source-serif-4/index.css';
+import '@fontsource-variable/source-serif-4/wght-italic.css';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+const fullTitle = title === site.name ? `${site.name} – ${site.tagline}` : `${title} | ${site.name}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="pl_PL" />
+    <meta name="theme-color" content="#15273f" />
+    <!-- Miejsce na Google Tag Manager + Consent Mode v2 (krok „Google”) -->
+  </head>
+  <body>
+    <a class="skip visually-hidden" href="#tresc">Przejdź do treści</a>
+    <Header />
+    <main id="tresc">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  .skip:focus {
+    position: fixed !important; top: 0.5rem; left: 0.5rem; width: auto; height: auto; clip: auto;
+    background: var(--ink); color: var(--white); padding: 0.6rem 1rem; z-index: 10;
+  }
+</style>

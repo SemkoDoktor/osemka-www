@@ -1,0 +1,117 @@
+---
+import Base from '../layouts/Base.astro';
+import ChartLoop from '../components/ChartLoop.astro';
+import Cartouche from '../components/Cartouche.astro';
+import StageLedger from '../components/StageLedger.astro';
+---
+<Base title="óSemka" description="Wyprawy żeglarskie na stalowym jachcie óSemka: etapy Wielkiej Pętli po Bałtyku i Morzu Północnym oraz rejsy przywódcze dla zarządów firm.">
+
+  <section class="hero wrap">
+    <div class="hero-text">
+      <h1>Nie płyń na wakacje. Dołącz do wyprawy.</h1>
+      <p class="lead">óSemka to stalowy jacht oceaniczny, który przez kolejne sezony płynie z Gdańska na północ. Możesz dołączyć na jeden etap albo popłynąć z nami całym zespołem.</p>
+      <div class="paths">
+        <a class="path" href="/wyprawy/">
+          <span class="path-title">Dołącz do wyprawy</span>
+          <span class="path-sub">Koja na etapie, 7–14 dni, pełna rola w załodze</span>
+        </a>
+        <a class="path path--b" href="/dla-firm/">
+          <span class="path-title">Rejs dla zarządu</span>
+          <span class="path-sub">3 dni na Bałtyku z kapitanem i coachem</span>
+        </a>
+      </div>
+    </div>
+    <div class="hero-chart">
+      <ChartLoop />
+    </div>
+  </section>
+
+  <section class="section section--shoal">
+    <div class="wrap split">
+      <div>
+        <h2>Jedna łódź, wiele sezonów</h2>
+        <p>Wielka Pętla to wyprawa rozpisana na lata. W 2027 roku pływamy po Bałtyku, w 2028 idziemy przez Morze Północne na Szetlandy i Wyspy Owcze, potem na Lofoty i do Nordkappu. Każdy odcinek to osobny etap, na który możesz kupić koję.</p>
+        <p>Na pokładzie nie ma pasażerów. Stoisz za sterem, trzymasz wachtę, uczysz się nawigacji i dostajesz opinię z rejsu do swojego stażu.</p>
+        <p><a href="/wyprawy/">Zobacz plan wyprawy i zasady udziału</a></p>
+      </div>
+      <Cartouche />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>Sezon 2027 na Bałtyku</h2>
+      <p class="muted">Plan wstępny. Zapisy z zaliczką ruszają w styczniu 2027, a osoby zapisane do Dziennika pokładowego dostaną wiadomość jako pierwsze.</p>
+      <StageLedger sezon={2027} />
+    </div>
+  </section>
+
+  <section class="section section--land">
+    <div class="wrap split split--b">
+      <div>
+        <h2>Zarząd na jednym pokładzie</h2>
+        <p>Trzy dni na Bałtyku dla zespołu do sześciu osób. Prowadzicie jacht sami, w systemie wacht, także nocą. Decyzje o kursie podejmujecie razem, a wieczorem coach biznesowy pomaga przełożyć to, co się wydarzyło, na Waszą codzienną pracę.</p>
+        <p>Po rejsie dostajecie raport z planem działań, a po 30 dniach spotykamy się jeszcze raz.</p>
+        <a class="btn btn--ghost" href="/dla-firm/">Program rejsu dla zarządu</a>
+      </div>
+      <blockquote class="pull">
+        <p>Na morzu nie da się odłożyć decyzji do następnego spotkania.</p>
+      </blockquote>
+    </div>
+  </section>
+
+</Base>
+
+<style>
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(1.5rem, 4vw, 3.5rem);
+    align-items: center;
+    padding-block: clamp(2rem, 6vw, 4.5rem);
+  }
+  .hero h1 { max-width: 12ch; }
+  .paths { display: grid; gap: 0.8rem; margin-top: 1.8rem; }
+  .path {
+    display: grid;
+    gap: 0.15rem;
+    padding: 1rem 1.2rem;
+    background: var(--magenta);
+    color: var(--white);
+    text-decoration: none;
+    border-left: 6px solid #6e0f3d;
+  }
+  .path:hover { background: #87124a; }
+  .path--b { background: var(--ink); border-left-color: var(--rule); }
+  .path--b:hover { background: #0c1a2c; }
+  .path-title { font-family: var(--font-display); font-stretch: 75%; font-weight: 750; font-size: var(--step-2); line-height: 1.05; }
+  .path-sub { font-size: var(--step--1); opacity: 0.92; }
+
+  .split {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: start;
+  }
+  .split--b { align-items: center; }
+  .pull {
+    margin: 0;
+    font-family: var(--font-display);
+    font-stretch: 70%;
+    font-weight: 760;
+    font-size: var(--step-3);
+    line-height: 1.05;
+    border-left: 6px solid var(--magenta);
+    padding-left: 1.2rem;
+  }
+  .pull p { margin: 0; }
+
+  @media (max-width: 64rem) {
+    .hero { grid-template-columns: 1fr; }
+    .hero h1 { max-width: 16ch; }
+    .paths { grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
+  }
+  @media (max-width: 56rem) {
+    .split { grid-template-columns: 1fr; }
+  }
+</style>

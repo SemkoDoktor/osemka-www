@@ -1,0 +1,62 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+---
+<Base title="Kontakt" description="Kontakt z kapitanem óSemki: pytania o etapy wyprawy, rejsy dla zarządów i Dzień na óSemce.">
+  <section class="wrap page">
+    <div>
+      <h1>Kontakt</h1>
+      <p class="lead">Napisz, o co chcesz zapytać. Odpowiadamy w ciągu dwóch dni roboczych, a w sezonie, gdy jesteśmy na morzu, czasem dłużej.</p>
+      <p>
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+        {site.phone && <><br /><a href={`tel:${site.phone.replace(/\s/g, '')}`}>{site.phone}</a></>}
+      </p>
+      <p class="muted">Pytasz w imieniu firmy? Szybciej będzie przez <a href="/dla-firm/#zapytanie">formularz dla firm</a>.</p>
+    </div>
+    <form action="/api/kontakt/" method="post" data-form="kontakt" data-event="contact_submit">
+      <div class="field">
+        <label for="k-imie">Imię</label>
+        <input id="k-imie" name="imie" autocomplete="given-name" required />
+      </div>
+      <div class="field">
+        <label for="k-email">E-mail</label>
+        <input id="k-email" name="email" type="email" autocomplete="email" required />
+      </div>
+      <div class="field">
+        <label for="k-temat">Temat</label>
+        <select id="k-temat" name="temat">
+          <option>Etap wyprawy</option>
+          <option>Dzień na óSemce</option>
+          <option>Rejs dla zarządu</option>
+          <option>Inne</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="k-tresc">Wiadomość</label>
+        <textarea id="k-tresc" name="tresc" required></textarea>
+      </div>
+      <label class="check">
+        <input type="checkbox" name="zgoda" required />
+        <span>Zgadzam się na przetwarzanie moich danych w celu odpowiedzi na wiadomość. Szczegóły w <a href="/polityka-prywatnosci/">polityce prywatności</a>.</span>
+      </label>
+      <button class="btn" type="submit">Wyślij wiadomość</button>
+    <div class="visually-hidden" aria-hidden="true"><label>Nie wypełniaj<input name="website" tabindex="-1" autocomplete="off" /></label></div>
+      <p class="form-msg" role="status" data-fallback={site.email}></p>
+    </form>
+  </section>
+</Base>
+
+<style>
+  .page {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: clamp(2rem, 5vw, 4.5rem);
+    padding-block: clamp(2rem, 6vw, 4.5rem);
+  }
+  @media (max-width: 56rem) { .page { grid-template-columns: 1fr; } }
+</style>
+
+<script>
+  import { wireForms } from '../scripts/forms';
+  wireForms();
+</script>

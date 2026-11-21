@@ -1,0 +1,49 @@
+---
+// Dane jachtu podane jak w ramce tytułowej mapy morskiej.
+import { yacht } from '../data/site';
+const rows: [string, string][] = [
+  ['Projekt', yacht.design],
+  ['Rok budowy', String(yacht.year)],
+  ['Kadłub', yacht.hull],
+  ['Długość', yacht.loa],
+  ['Szerokość', yacht.beam],
+  ['Zanurzenie', yacht.draught],
+  ['Wysokość masztu nad wodą', yacht.airDraught],
+  ['Wyporność', yacht.displacement],
+  ['Silnik', yacht.engine],
+  ['Koje dla załogi', `${yacht.berthsGuests} + kapitan`],
+];
+---
+<div class="cartouche">
+  <p class="c-title"><span class="place">s/y</span> {yacht.name}</p>
+  <dl>
+    {rows.map(([k, v]) => (<div><dt>{k}</dt><dd>{v}</dd></div>))}
+  </dl>
+</div>
+
+<style>
+  .cartouche {
+    border: 3px double var(--ink);
+    outline: 1px solid var(--ink);
+    outline-offset: 5px;
+    background: var(--white);
+    padding: 1.4rem 1.6rem 1.2rem;
+    margin: 6px;
+  }
+  .c-title {
+    font-family: var(--font-display);
+    font-stretch: 70%;
+    font-weight: 800;
+    font-size: var(--step-3);
+    line-height: 1;
+    text-align: center;
+    margin: 0 auto 1rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--ink);
+  }
+  .c-title .place { font-family: var(--font-text); font-weight: 400; font-size: 0.6em; }
+  dl { margin: 0; display: grid; gap: 0.15rem; }
+  dl div { display: flex; justify-content: space-between; gap: 1rem; border-bottom: 1px dotted var(--rule); padding-block: 0.3rem; }
+  dt { color: var(--steel); font-size: var(--step--1); }
+  dd { margin: 0; font-family: var(--font-display); font-stretch: 85%; font-weight: 600; text-align: right; }
+</style>

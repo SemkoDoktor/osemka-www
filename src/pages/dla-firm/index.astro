@@ -1,0 +1,130 @@
+---
+import Base from '../../layouts/Base.astro';
+import LeadForm from '../../components/LeadForm.astro';
+---
+<Base title="Rejs dla zarządu" description="Wachta Zarządu: trzy dni na Bałtyku dla zespołu do sześciu osób, z kapitanem i coachem biznesowym. Raport z planem działań i spotkanie po 30 dniach.">
+  <section class="wrap hero">
+    <div>
+      <h1>Zarząd na jednym pokładzie</h1>
+      <p class="lead">Trzy dni na Bałtyku dla zespołu do sześciu osób. Prowadzicie jacht sami, decydujecie razem i od razu widzicie skutki tych decyzji.</p>
+      <a class="btn" href="#zapytanie">Zapytaj o termin</a>
+    </div>
+    <div class="photo-slot" style="--ratio: 4 / 5">Zdjęcie: zespół przy sterze, nocna wachta</div>
+  </section>
+
+  <section class="section section--land">
+    <div class="wrap why">
+      <h2>Dlaczego jacht, a nie hotel</h2>
+      <div class="why-grid">
+        <p><strong>Decyzje mają skutki od razu.</strong> Zły kurs to mokry pokład i dłuższa droga. Zespół szybko widzi, jak naprawdę decyduje.</p>
+        <p><strong>Role się mieszają.</strong> Prezes zwija linę, a najmłodszy członek zarządu prowadzi nawigację. Hierarchia zostaje na lądzie.</p>
+        <p><strong>Nie ma ucieczki w telefon.</strong> Na wachcie liczy się ten, kto stoi obok. To najlepsze warunki do rozmów, których w biurze unikacie.</p>
+        <p><strong>Tylko Wasz zespół.</strong> Na pokładzie jest sześć koi, więc nie dzielicie jachtu z nikim. Kapitan i coach pracują wyłącznie z Wami.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>Przebieg</h2>
+      <ol class="timeline">
+        <li>
+          <h3>Przed rejsem</h3>
+          <p>Rozmowa coacha z prezesem i HR. Ustalamy, nad czym chcecie pracować, i pod to układamy scenariusz rejsu.</p>
+        </li>
+        <li>
+          <h3>Dzień 1: załoga</h3>
+          <p>Odprawa bezpieczeństwa, podział ról, pierwsze manewry w porcie i wyjście w morze. Wieczorem pierwsza rozmowa z coachem.</p>
+        </li>
+        <li>
+          <h3>Dzień 2: wachta</h3>
+          <p>Całodobowa żegluga w systemie wacht, także w nocy. Zespół sam planuje trasę i reaguje na zmianę pogody lub planu.</p>
+        </li>
+        <li>
+          <h3>Dzień 3: kurs na port</h3>
+          <p>Powrót i debriefing: co zobaczyliście w sobie na morzu i co z tego przenosicie do pracy.</p>
+        </li>
+        <li>
+          <h3>Po 30 dniach</h3>
+          <p>Raport z planem działań i spotkanie kontrolne z coachem: co się zmieniło, co trzeba poprawić.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section--shoal">
+    <div class="wrap team">
+      <div>
+        <h2>Kto prowadzi</h2>
+        <p><strong>Kapitan óSemki</strong> odpowiada za jacht i bezpieczeństwo. Ma uprawnienia kapitańskie i za sobą lata pracy w IT oraz prowadzenia zespołów, więc rozumie, z czym przychodzicie.</p>
+        <p><strong>Coach biznesowy</strong> prowadzi rozmowy, debriefingi i raport. To on łączy to, co dzieje się na pokładzie, z Waszymi celami.</p>
+        <p><a href="/kapitan/">Więcej o kapitanie</a> · <a href="/jacht/">O jachcie</a></p>
+      </div>
+      <div class="box">
+        <h3>Szczegóły</h3>
+        <dl>
+          <div><dt>Zespół</dt><dd>4–6 osób</dd></div>
+          <div><dt>Czas</dt><dd>3 dni + przygotowanie i spotkanie po 30 dniach</dd></div>
+          <div><dt>Akwen</dt><dd>Zatoka Gdańska i południowy Bałtyk</dd></div>
+          <div><dt>Terminy</dt><dd>maj, czerwiec, wrzesień</dd></div>
+          <div><dt>Doświadczenie</dt><dd>niepotrzebne</dd></div>
+          <div><dt>W cenie</dt><dd>jacht, kapitan, coach, wyżywienie, porty, raport</dd></div>
+          <div><dt>Cena</dt><dd>wycena po pierwszej rozmowie</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="zapytanie">
+    <div class="wrap form-wrap">
+      <div>
+        <h2>Zapytaj o termin</h2>
+        <p>Napisz kilka zdań o zespole i o tym, co chcecie osiągnąć. Kapitan odezwie się w ciągu dwóch dni roboczych i umówi krótką rozmowę.</p>
+        <p class="muted">Wolicie najpierw poznać nas na miejscu? Przyjedziemy do Waszego biura na <strong>Śniadanie z kapitanem</strong>: godzina opowieści z wypraw i krótki warsztat dla zarządu.</p>
+      </div>
+      <LeadForm />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+    padding-block: clamp(2rem, 6vw, 4.5rem);
+  }
+  .hero h1 { max-width: 11ch; }
+  .why-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem 3rem; }
+  .timeline { list-style: none; margin: 0; padding: 0; counter-reset: krok; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-top: 2px solid var(--ink); }
+  .timeline li { counter-increment: krok; padding: 1.2rem 1.2rem 0 0; border-right: 1px solid var(--rule); margin-right: 1.2rem; }
+  .timeline li:last-child { border-right: 0; margin-right: 0; }
+  .timeline li::before {
+    content: counter(krok);
+    display: block;
+    font-family: var(--font-display); font-stretch: 70%; font-weight: 800;
+    font-size: 2.2rem; line-height: 1; color: var(--magenta); margin-bottom: 0.6rem;
+  }
+  .timeline p { font-size: 1rem; }
+  .team, .form-wrap {
+    display: grid;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: start;
+  }
+  .form-wrap { grid-template-columns: minmax(0, 4fr) minmax(0, 6fr); }
+  .box { background: var(--white); border: 1px solid var(--rule); padding: 1.5rem 1.6rem; }
+  dl { margin: 0; display: grid; gap: 0.2rem; }
+  dl div { display: grid; grid-template-columns: 8rem 1fr; gap: 1rem; padding-block: 0.4rem; border-bottom: 1px dotted var(--rule); }
+  dt { color: var(--steel); font-size: var(--step--1); }
+  dd { margin: 0; font-size: 1rem; }
+  @media (max-width: 64rem) {
+    .timeline { grid-template-columns: 1fr; }
+    .timeline li { border-right: 0; margin-right: 0; border-bottom: 1px solid var(--rule); padding-bottom: 0.4rem; display: grid; grid-template-columns: 3rem 1fr; column-gap: 1rem; }
+    .timeline li::before { grid-row: span 2; }
+  }
+  @media (max-width: 56rem) {
+    .hero, .team, .form-wrap, .why-grid { grid-template-columns: 1fr; }
+  }
+</style>

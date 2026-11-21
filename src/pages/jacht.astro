@@ -1,0 +1,52 @@
+---
+import Base from '../layouts/Base.astro';
+import Cartouche from '../components/Cartouche.astro';
+---
+<Base title="Jacht" description="óSemka: stalowy jacht oceaniczny Bruce Roberts 434, 13,4 m, 16 ton. Sześć koi dla załogi, zbudowany do żeglugi w wysokich szerokościach.">
+  <section class="wrap hero">
+    <div>
+      <h1>Stal, nie plastik</h1>
+      <p class="lead">óSemka to Bruce Roberts 434 ze stalowym kadłubem. Szesnaście ton, które spokojnie idą przez falę, przy której lżejsze jachty zostają w porcie.</p>
+      <p>Projekty Bruce’a Robertsa od lat wybierają żeglarze, którzy pływają daleko i długo: na oceanach, na północy, w miejscach bez serwisu za rogiem. Stal wybacza kontakt z lodem i skałą, a ciężki kadłub daje spokojniejsze ruchy na fali, co docenisz na nocnej wachcie.</p>
+    </div>
+    <Cartouche />
+  </section>
+
+  <section class="section section--shoal">
+    <div class="wrap gallery">
+      <div class="photo-slot" style="--ratio: 3 / 2">Zdjęcie: óSemka pod pełnymi żaglami</div>
+      <div class="photo-slot" style="--ratio: 3 / 2">Zdjęcie: kokpit i ster</div>
+      <div class="photo-slot" style="--ratio: 3 / 2">Zdjęcie: mesa</div>
+      <div class="photo-slot" style="--ratio: 3 / 2">Zdjęcie: stanowisko nawigacyjne</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap cols">
+      <div>
+        <h2>Pod pokładem</h2>
+        <p>Kabina dziobowa, kabina rufowa i mesa z kojami dają sześć miejsc dla załogi i osobne miejsce dla kapitana. Są dwie toalety, kambuz z kuchenką i piekarnikiem oraz stanowisko nawigacyjne.</p>
+        <p class="muted">Dokładny układ koi i wyposażenia opiszemy po aktualizacji zdjęć wnętrza.</p>
+      </div>
+      <div>
+        <h2>Bezpieczeństwo</h2>
+        <p>Przed każdym etapem przechodzisz odprawę: kamizelki i szelki, praca na pokładzie, człowiek za burtą, łączność. Na wachcie nocnej zawsze obowiązują szelki i lifeline.</p>
+        <p class="muted">Lista wyposażenia ratunkowego zostanie uzupełniona przed otwarciem zapisów.</p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: start;
+    padding-block: clamp(2rem, 6vw, 4.5rem);
+  }
+  .gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+  .cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(2rem, 5vw, 4.5rem); }
+  @media (max-width: 56rem) { .hero, .cols { grid-template-columns: 1fr; } }
+  @media (max-width: 36rem) { .gallery { grid-template-columns: 1fr; } }
+</style>

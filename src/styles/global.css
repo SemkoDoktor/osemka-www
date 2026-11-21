@@ -1,0 +1,142 @@
+/* óSemka – system wizualny „mapa nawigacyjna”
+   Kolory wzięte z mapy morskiej: białe morze, płowy ląd, błękit płycizn,
+   granat druku i magenta używana na mapach do świateł i ostrzeżeń. */
+
+:root {
+  --sea: #f6f8f7;        /* tło: biel morza na mapie */
+  --shoal: #d3e6ee;      /* płycizny: tła sekcji */
+  --land: #ebdfb8;       /* ląd: wyróżnienia, ramki */
+  --ink: #15273f;        /* granat druku: tekst */
+  --steel: #55656e;      /* stal: tekst pomocniczy */
+  --magenta: #a1185a;    /* akcent: kurs, przyciski, linki */
+  --rule: #9fb4c0;       /* linie siatki i podziałki */
+  --white: #ffffff;
+
+  --font-display: 'Archivo Variable', 'Arial Narrow', sans-serif;
+  --font-text: 'Source Serif 4 Variable', Georgia, serif;
+
+  /* skala typograficzna 1.25 od 1.125rem */
+  --step--1: 0.9rem;
+  --step-0: 1.125rem;
+  --step-1: 1.4rem;
+  --step-2: 1.76rem;
+  --step-3: clamp(1.9rem, 3.2vw, 2.6rem);
+  --step-4: clamp(2.5rem, 5.6vw, 4.6rem);
+
+  --measure: 66ch;
+  --gutter: clamp(1rem, 4vw, 3rem);
+  --wide: 76rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--sea);
+  color: var(--ink);
+  font-family: var(--font-text);
+  font-size: var(--step-0);
+  line-height: 1.62;
+  font-optical-sizing: auto;
+}
+
+img, svg { max-width: 100%; height: auto; display: block; }
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-stretch: 72%;
+  font-weight: 760;
+  line-height: 1.02;
+  letter-spacing: -0.005em;
+  margin: 0 0 0.5em;
+  text-wrap: balance;
+}
+h1 { font-size: var(--step-4); }
+h2 { font-size: var(--step-3); }
+h3 { font-size: var(--step-1); font-stretch: 85%; line-height: 1.15; }
+
+p { margin: 0 0 1em; max-width: var(--measure); text-wrap: pretty; }
+
+a { color: var(--magenta); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+
+:focus-visible { outline: 3px solid var(--magenta); outline-offset: 3px; }
+
+/* nazwy miejsc jak na mapie: kursywa szeryfowa */
+.place { font-style: italic; letter-spacing: 0.01em; }
+
+.wrap { width: min(100% - 2 * var(--gutter), var(--wide)); margin-inline: auto; }
+.prose { max-width: var(--measure); }
+.lead { font-size: var(--step-1); line-height: 1.45; color: var(--ink); }
+.muted { color: var(--steel); }
+
+.section { padding-block: clamp(3rem, 8vw, 6.5rem); }
+.section--shoal { background: var(--shoal); }
+.section--land { background: var(--land); }
+
+/* przyciski: pełny dla głównego działania, obrys dla drugiego */
+.btn {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-stretch: 85%;
+  font-weight: 650;
+  font-size: 1.05rem;
+  padding: 0.8em 1.3em;
+  border: 2px solid var(--magenta);
+  background: var(--magenta);
+  color: var(--white);
+  text-decoration: none;
+  border-radius: 2px;
+  cursor: pointer;
+  line-height: 1.1;
+}
+.btn:hover { background: #87124a; border-color: #87124a; }
+.btn--ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
+.btn--ghost:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
+
+/* formularze */
+.field { display: grid; gap: 0.3rem; margin-bottom: 1rem; }
+.field label { font-family: var(--font-display); font-stretch: 85%; font-weight: 600; font-size: 1rem; }
+.field input, .field select, .field textarea {
+  font: inherit;
+  font-size: 1rem;
+  padding: 0.65rem 0.75rem;
+  border: 1.5px solid var(--steel);
+  border-radius: 2px;
+  background: var(--white);
+  color: var(--ink);
+  width: 100%;
+}
+.field textarea { min-height: 7rem; resize: vertical; }
+.check { display: flex; gap: 0.6rem; align-items: flex-start; font-size: var(--step--1); line-height: 1.45; margin-bottom: 0.8rem; }
+.check input { margin-top: 0.25rem; accent-color: var(--magenta); width: 1.1rem; height: 1.1rem; flex: none; }
+.form-msg { font-size: var(--step--1); margin-top: 0.8rem; min-height: 1.4em; }
+.form-msg[data-state="ok"] { color: #1d6b3f; }
+.form-msg[data-state="err"] { color: var(--magenta); }
+
+/* miejsce na zdjęcie – do podmiany na prawdziwe zdjęcia */
+.photo-slot {
+  aspect-ratio: var(--ratio, 4 / 3);
+  background:
+    repeating-linear-gradient(0deg, transparent 0 39px, rgb(159 180 192 / 0.45) 39px 40px),
+    repeating-linear-gradient(90deg, transparent 0 39px, rgb(159 180 192 / 0.45) 39px 40px),
+    var(--shoal);
+  display: grid;
+  place-items: end start;
+  padding: 1rem;
+  color: var(--steel);
+  font-size: var(--step--1);
+  font-style: italic;
+  border: 1px solid var(--rule);
+}
+
+.visually-hidden {
+  position: absolute !important; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

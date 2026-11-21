@@ -1,0 +1,47 @@
+---
+import { site } from '../data/site';
+import NewsletterForm from './NewsletterForm.astro';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="wrap grid">
+    <section class="news" aria-labelledby="stopka-dziennik">
+      <h2 id="stopka-dziennik">Dziennik pokładowy</h2>
+      <p>Raz w miesiącu: nowe etapy, relacje z wypraw i pierwszeństwo zapisów. Bez spamu, wypisujesz się jednym kliknięciem.</p>
+      <NewsletterForm id="stopka" dark />
+    </section>
+    <div class="meta">
+      <p>
+        <strong>{site.company}</strong><br />
+        {site.nip && <>NIP {site.nip}<br /></>}
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+        {site.phone && <><br /><a href={`tel:${site.phone.replace(/\s/g, '')}`}>{site.phone}</a></>}
+      </p>
+      <ul>
+        <li><a href="/kontakt/">Kontakt</a></li>
+        <li><a href="/polityka-prywatnosci/">Polityka prywatności</a></li>
+      </ul>
+      <p class="small">© {year} óSemka. Port macierzysty: <span class="place">{site.homePort}</span>.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--ink);
+    color: #e6edf1;
+    padding-block: clamp(2.5rem, 6vw, 4.5rem);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 2.5rem 4rem;
+  }
+  h2 { font-size: var(--step-2); color: var(--white); }
+  a { color: #f3b4d2; }
+  ul { list-style: none; padding: 0; margin: 0 0 1rem; display: grid; gap: 0.3rem; }
+  .small { font-size: var(--step--1); color: #b6c4cc; }
+  @media (max-width: 48rem) {
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>

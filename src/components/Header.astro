@@ -1,0 +1,80 @@
+---
+import { nav } from '../data/site';
+const path = Astro.url.pathname;
+---
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/" aria-label="óSemka – strona główna">
+      <span class="brand-name">óSemka</span>
+      <span class="brand-sub">wyprawy żeglarskie</span>
+    </a>
+    <nav aria-label="Główne menu">
+      <ul>
+        {nav.map((item) => (
+          <li>
+            <a href={item.href} aria-current={path.startsWith(item.href) ? 'page' : undefined}>
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--rule);
+    background: var(--sea);
+  }
+  .bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem 2rem;
+    padding-block: 0.9rem;
+  }
+  .brand {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .brand-name {
+    font-family: var(--font-display);
+    font-stretch: 70%;
+    font-weight: 800;
+    font-size: 1.85rem;
+    line-height: 1;
+  }
+  .brand-sub {
+    font-style: italic;
+    color: var(--steel);
+    font-size: 0.95rem;
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.2rem 1.4rem;
+  }
+  nav a {
+    font-family: var(--font-display);
+    font-stretch: 85%;
+    font-weight: 600;
+    font-size: 1.02rem;
+    color: var(--ink);
+    text-decoration: none;
+    padding-block: 0.3rem;
+    border-bottom: 2px solid transparent;
+  }
+  nav a:hover { border-bottom-color: var(--rule); }
+  nav a[aria-current='page'] { border-bottom-color: var(--magenta); }
+  @media (max-width: 30rem) {
+    .brand-sub { display: none; }
+  }
+</style>

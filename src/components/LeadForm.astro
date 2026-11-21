@@ -1,0 +1,64 @@
+---
+// Zapytanie od firmy (Produkt B). Wysyłka do /api/lead – funkcja Cloudflare zapisze je w D1
+// i wyśle mail do kapitana (krok „formularze”).
+import { site } from '../data/site';
+---
+<form class="lead" action="/api/lead/" method="post" data-form="lead" data-event="b2b_lead">
+  <div class="cols">
+    <div class="field">
+      <label for="l-imie">Imię i nazwisko</label>
+      <input id="l-imie" name="imie" autocomplete="name" required />
+    </div>
+    <div class="field">
+      <label for="l-firma">Firma</label>
+      <input id="l-firma" name="firma" autocomplete="organization" required />
+    </div>
+    <div class="field">
+      <label for="l-email">E-mail służbowy</label>
+      <input id="l-email" name="email" type="email" autocomplete="email" required />
+    </div>
+    <div class="field">
+      <label for="l-tel">Telefon (opcjonalnie)</label>
+      <input id="l-tel" name="telefon" type="tel" autocomplete="tel" />
+    </div>
+    <div class="field">
+      <label for="l-rola">Twoja rola</label>
+      <select id="l-rola" name="rola">
+        <option>Prezes lub członek zarządu</option>
+        <option>HR / People / L&amp;D</option>
+        <option>Organizacja wyjazdu</option>
+        <option>Inna</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="l-termin">Preferowany termin</label>
+      <select id="l-termin" name="termin">
+        <option>Maj–czerwiec</option>
+        <option>Wrzesień</option>
+        <option>Jeszcze nie wiem</option>
+      </select>
+    </div>
+  </div>
+  <div class="field">
+    <label for="l-cel">Co chcecie osiągnąć jako zespół?</label>
+    <textarea id="l-cel" name="cel" placeholder="Np. nowy członek zarządu, trudny rok przed nami, chcemy ustalić strategię."></textarea>
+  </div>
+  <label class="check">
+    <input type="checkbox" name="zgoda" required />
+    <span>Zgadzam się na kontakt w sprawie oferty. Administratorem danych jest {site.company}, szczegóły w <a href="/polityka-prywatnosci/">polityce prywatności</a>.</span>
+  </label>
+  <input type="hidden" name="zrodlo" value="dla-firm" />
+  <button class="btn" type="submit">Wyślij zapytanie</button>
+  <div class="visually-hidden" aria-hidden="true"><label>Nie wypełniaj<input name="website" tabindex="-1" autocomplete="off" /></label></div>
+  <p class="form-msg" role="status" data-fallback={site.email}></p>
+</form>
+
+<style>
+  .cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 1.2rem; }
+  @media (max-width: 40rem) { .cols { grid-template-columns: 1fr; } }
+</style>
+
+<script>
+  import { wireForms } from '../scripts/forms';
+  wireForms();
+</script>

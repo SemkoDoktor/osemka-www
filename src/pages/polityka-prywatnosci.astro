@@ -1,0 +1,36 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+---
+<Base title="Polityka prywatności" description="Jak óSemka przetwarza dane osobowe i pliki cookies.">
+  <article class="wrap prose page">
+    <h1>Polityka prywatności</h1>
+    <p class="note">Wersja robocza do weryfikacji przez prawnika przed publikacją.</p>
+
+    <h2>Administrator</h2>
+    <p>Administratorem Twoich danych jest {site.company}{site.nip && `, NIP ${site.nip}`}. Kontakt: <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+
+    <h2>Jakie dane i po co</h2>
+    <ul>
+      <li><strong>Newsletter „Dziennik pokładowy”:</strong> adres e-mail, na podstawie Twojej zgody, do czasu jej wycofania.</li>
+      <li><strong>Formularz dla firm i formularz kontaktowy:</strong> imię i nazwisko, firma, e-mail, telefon i treść wiadomości, żeby odpowiedzieć i przygotować ofertę.</li>
+      <li><strong>Rezerwacja etapu</strong> (od 2027 roku): dane potrzebne do zawarcia i wykonania umowy uczestnictwa.</li>
+      <li><strong>Statystyki strony:</strong> Google Analytics, tylko jeśli wyrazisz zgodę w banerze cookies.</li>
+    </ul>
+
+    <h2>Komu przekazujemy dane</h2>
+    <p>Dostawcom usług, z których korzysta strona: hosting (Cloudflare), wysyłka e-maili (Brevo), płatności (Stripe), statystyki (Google). Nie sprzedajemy danych.</p>
+
+    <h2>Twoje prawa</h2>
+    <p>Możesz w każdej chwili zażądać dostępu do danych, ich poprawienia lub usunięcia, ograniczenia przetwarzania, przeniesienia danych, wycofać zgodę i złożyć skargę do Prezesa UODO.</p>
+
+    <h2>Cookies</h2>
+    <p>Bez Twojej zgody używamy tylko plików niezbędnych do działania strony. Pliki statystyczne włączamy dopiero po zgodzie, którą możesz zmienić w dowolnym momencie.</p>
+  </article>
+</Base>
+
+<style>
+  .page { padding-block: clamp(2rem, 6vw, 4.5rem); }
+  .page h2 { font-size: var(--step-2); margin-top: 1.6em; }
+  .note { background: var(--land); padding: 0.7rem 1rem; font-size: var(--step--1); }
+</style>

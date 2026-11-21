@@ -1,0 +1,84 @@
+---
+import Base from '../../layouts/Base.astro';
+import ChartLoop from '../../components/ChartLoop.astro';
+import StageLedger from '../../components/StageLedger.astro';
+import NewsletterForm from '../../components/NewsletterForm.astro';
+---
+<Base title="Wyprawy" description="Wielka Pętla óSemki: etapy wyprawy żeglarskiej po Bałtyku, Morzu Północnym i Norwegii. Koja na etapie, pełna rola w załodze, opinia z rejsu.">
+  <section class="wrap intro">
+    <h1>Wielka Pętla</h1>
+    <p class="lead">Wyprawa rozpisana na kilka sezonów: z Gdańska przez Bałtyk, Morze Północne i Norwegię aż za koło podbiegunowe. Każdy odcinek to osobny etap, na który kupujesz koję.</p>
+  </section>
+
+  <section class="wrap">
+    <ChartLoop />
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>Sezon 2027</h2>
+      <p class="muted">Plan wstępny. Terminy i ceny potwierdzimy w styczniu 2027, wtedy też otworzymy zapisy z zaliczką.</p>
+      <StageLedger sezon={2027} />
+    </div>
+  </section>
+
+  <section class="section section--shoal">
+    <div class="wrap rules">
+      <div>
+        <h2>Jak wygląda udział</h2>
+        <ol class="steps">
+          <li><strong>Rozmowa z kapitanem.</strong> 15 minut online. Sprawdzamy, czy etap pasuje do Twojego doświadczenia.</li>
+          <li><strong>Rezerwacja i zaliczka.</strong> 30% ceny rezerwuje koję. Resztę wpłacasz sześć tygodni przed etapem.</li>
+          <li><strong>Odprawa.</strong> Dwa tygodnie przed wypłynięciem: plan, lista rzeczy, podział wacht.</li>
+          <li><strong>Etap.</strong> Wachty, nawigacja, manewry w portach, gotowanie na zmianę.</li>
+          <li><strong>Po rejsie.</strong> Opinia z rejsu do stażu, pieczątka w Paszporcie óSemki i pamiątka z pracowni.</li>
+        </ol>
+      </div>
+      <div class="box">
+        <h3>W cenie koi</h3>
+        <ul>
+          <li>miejsce na jachcie i udział w wyprawie,</li>
+          <li>prowadzenie przez kapitana i szkolenie na pokładzie,</li>
+          <li>paliwo, opłaty portowe, ubezpieczenie jachtu,</li>
+          <li>opinia z rejsu,</li>
+          <li>pamiątka z mapą etapu, wykonana w drewnie.</li>
+        </ul>
+        <h3>Osobno</h3>
+        <ul>
+          <li>kasa jachtowa na jedzenie (dzielona przez załogę),</li>
+          <li>dojazd na start i powrót z mety,</li>
+          <li>ubezpieczenie NNW i kosztów leczenia.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap first">
+      <div>
+        <h2>Nie wiesz, czy dasz radę?</h2>
+        <p>Zacznij od jednego dnia. Na <strong>Dniu na óSemce</strong> wychodzimy z Gdańska na 6–8 godzin, stawiasz żagle, stoisz za sterem i sprawdzasz, jak czujesz się na morzu. Terminy na maj i wrzesień 2027 opublikujemy wraz z otwarciem zapisów.</p>
+      </div>
+      <div>
+        <h3>Daj znać, gdy ruszą zapisy</h3>
+        <NewsletterForm id="wyprawy" />
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .intro { padding-block: clamp(2rem, 6vw, 4rem) 1.5rem; }
+  .rules, .first {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: start;
+  }
+  .steps { padding-left: 1.4rem; margin: 0; display: grid; gap: 0.8rem; }
+  .steps li::marker { font-family: var(--font-display); font-weight: 800; color: var(--magenta); }
+  .box { background: var(--white); border: 1px solid var(--rule); padding: 1.5rem 1.6rem; }
+  .box ul { margin: 0 0 1.2rem; padding-left: 1.1rem; }
+  .box ul:last-child { margin-bottom: 0; }
+  @media (max-width: 56rem) { .rules, .first { grid-template-columns: 1fr; } }
+</style>
