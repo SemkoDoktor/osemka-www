@@ -1,6 +1,6 @@
 # óSemka – strona www.osemka.info
 
-Wyprawy żeglarskie na stalowym jachcie óSemka. Astro (strona statyczna) + Cloudflare Pages Functions (formularze) + D1 (baza).
+Wyprawy żeglarskie na stalowym jachcie óSemka. Astro (strona statyczna) + Cloudflare Worker (formularze /api/*) + D1 (baza).
 
 Dokumenty projektu (produkty, symulacja, go-to-market, architektura) są w OneDrive: `8ka-www2026/src/_projekt/`.
 
@@ -14,9 +14,8 @@ npm run dev                 # podgląd strony: http://localhost:4321
 Formularze z bazą danych lokalnie:
 
 ```sh
-npm run build
 npx wrangler d1 migrations apply osemka --local
-npx wrangler pages dev dist --port 8788   # http://127.0.0.1:8788
+npx wrangler dev --port 8788   # buduje stronę i uruchamia Workera: http://127.0.0.1:8788
 ```
 
 ## Struktura
@@ -27,19 +26,17 @@ npx wrangler pages dev dist --port 8788   # http://127.0.0.1:8788
 | `src/components/` | mapa Pętli, ramka jachtu, wykaz etapów, formularze |
 | `src/content/etapy/` | etapy wyprawy (jeden plik = jeden etap) |
 | `src/data/site.ts` | dane firmy i jachtu |
-| `functions/api/` | backend formularzy: `/api/lead/`, `/api/kontakt/`, `/api/newsletter/` |
+| `worker/` | Cloudflare Worker: formularze `/api/lead/`, `/api/kontakt/`, `/api/newsletter/` |
+| `lib/forms.ts` | walidacja, zapis, wysyłka maili (Brevo) |
 | `migrations/` | schemat bazy D1 |
 | `CONTENT-TODO.md` | treści do potwierdzenia przed publikacją |
 
 ## Publikacja
 
-Każdy push do gałęzi `main` na GitHubie publikuje stronę przez Cloudflare Pages. Inne gałęzie dostają podgląd pod osobnym adresem.
+Projekt Cloudflare Workers `osemka-www` jest połączony z repozytorium GitHub. Każdy push do `main` uruchamia budowę (`npm run build` z `wrangler.toml`) i `npx wrangler deploy`.
 
-Ustawienia projektu w Cloudflare Pages:
-- Build command: `npm run build`
-- Build output: `dist`
-- Zmienne: z `wrangler.toml`; sekret `BREVO_API_KEY` ustawiany w panelu.
-- Powiązanie D1: `DB` → baza `osemka`.
+- Baza D1 `osemka` (region EEUR), powiązanie `DB`. Zmiany schematu: nowy plik w `migrations/`, potem `npx wrangler d1 migrations apply osemka --remote`.
+- Sekret: `npx wrangler secret put BREVO_API_KEY`.
 
 ## Zdarzenia Google Analytics (dataLayer)
 

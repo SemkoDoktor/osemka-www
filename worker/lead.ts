@@ -1,7 +1,7 @@
-import { type Env, json, readForm, isEmail, notifyOwner } from '../../../lib/forms';
+import { type Env, json, readForm, isEmail, notifyOwner } from '../lib/forms';
 
 // POST /api/lead/ – zapytanie od firmy (Produkt B)
-export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
+export async function handleLead(request: Request, env: Env): Promise<Response> {
   const { get, isBot } = await readForm(request);
   if (isBot) return json({ ok: true });
 
@@ -35,4 +35,4 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   });
 
   return json({ ok: true });
-};
+}

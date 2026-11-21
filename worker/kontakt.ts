@@ -1,7 +1,7 @@
-import { type Env, json, readForm, isEmail, notifyOwner } from '../../../lib/forms';
+import { type Env, json, readForm, isEmail, notifyOwner } from '../lib/forms';
 
 // POST /api/kontakt/ – formularz kontaktowy
-export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
+export async function handleKontakt(request: Request, env: Env): Promise<Response> {
   const { get, isBot } = await readForm(request);
   if (isBot) return json({ ok: true });
 
@@ -19,4 +19,4 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   await notifyOwner(env, `Wiadomość ze strony: ${temat}`, { Imię: imie, 'E-mail': email, Temat: temat, Wiadomość: tresc });
 
   return json({ ok: true });
-};
+}

@@ -1,7 +1,18 @@
-# Konfiguracja Cloudflare Pages (strona + funkcje formularzy).
+# Konfiguracja Cloudflare Workers: strona statyczna (dist/) + formularze (/api/*).
 name = "osemka-www"
-pages_build_output_dir = "./dist"
+main = "worker/index.ts"
 compatibility_date = "2026-11-01"
+workers_dev = true
+
+# Cloudflare buduje stronę przed publikacją (niezależnie od ustawień w panelu).
+[build]
+command = "npm run build"
+
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+not_found_handling = "404-page"
+run_worker_first = ["/api/*"]
 
 [vars]
 SITE_URL = "https://www.osemka.info"
@@ -10,10 +21,13 @@ BREVO_LIST_ID = ""                    # uzupełnimy po założeniu konta Brevo
 BREVO_DOI_TEMPLATE_ID = ""            # szablon maila potwierdzającego zapis
 
 # Sekret ustawiany poza repozytorium:
-#   npx wrangler pages secret put BREVO_API_KEY
+#   npx wrangler secret put BREVO_API_KEY
 
 [[d1_databases]]
 binding = "DB"
 database_name = "osemka"
 database_id = "66c66264-2041-4b8e-b3cb-1e3d33c370af"
 migrations_dir = "migrations"
+
+[observability]
+enabled = true

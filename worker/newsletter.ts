@@ -1,9 +1,9 @@
-import { type Env, json, readForm, isEmail, brevoDoubleOptIn } from '../../../lib/forms';
+import { type Env, json, readForm, isEmail, brevoDoubleOptIn } from '../lib/forms';
 
 const CONSENT = 'Chcę dostawać newsletter óSemki. Zgodę mogę wycofać w każdej chwili.';
 
 // POST /api/newsletter/ – zapis do „Dziennika pokładowego” (podwójna zgoda przez Brevo)
-export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
+export async function handleNewsletter(request: Request, env: Env): Promise<Response> {
   const { get, isBot } = await readForm(request);
   if (isBot) return json({ ok: true });
 
@@ -20,4 +20,4 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   await brevoDoubleOptIn(env, email);
 
   return json({ ok: true });
-};
+}
