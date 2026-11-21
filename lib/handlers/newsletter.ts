@@ -1,4 +1,4 @@
-import { type Env, json, readForm, isEmail, brevoDoubleOptIn } from '../lib/forms';
+import { type Env, json, readForm, isEmail, brevoDoubleOptIn } from '../forms';
 
 const CONSENT = 'Chcę dostawać newsletter óSemki. Zgodę mogę wycofać w każdej chwili.';
 

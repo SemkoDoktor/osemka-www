@@ -1,4 +1,4 @@
-import { type Env, json, readForm, isEmail, notifyOwner } from '../lib/forms';
+import { type Env, json, readForm, isEmail, notifyOwner } from '../forms';
 
 // POST /api/kontakt/ – formularz kontaktowy
 export async function handleKontakt(request: Request, env: Env): Promise<Response> {

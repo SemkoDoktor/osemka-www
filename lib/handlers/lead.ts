@@ -1,4 +1,4 @@
-import { type Env, json, readForm, isEmail, notifyOwner } from '../lib/forms';
+import { type Env, json, readForm, isEmail, notifyOwner } from '../forms';
 
 // POST /api/lead/ – zapytanie od firmy (Produkt B)
 export async function handleLead(request: Request, env: Env): Promise<Response> {

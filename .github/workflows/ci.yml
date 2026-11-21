@@ -14,7 +14,7 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Typy workera (formularze)
-        run: npx tsc -p worker/tsconfig.json
+      - name: Typy funkcji formularzy
+        run: npx tsc -p functions/tsconfig.json
       - name: Budowa strony
         run: npm run build
