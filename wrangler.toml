@@ -9,8 +9,8 @@ SITE_URL = "https://www.osemka.info"
 OWNER_EMAIL = "kapitan@osemka.info"   # tu przychodzą zapytania ze strony
 # Wysyłka maili przez Microsoft 365 (Graph API, aplikacja w Entra ID).
 MAIL_FROM = "kapitan@osemka.info"     # skrzynka nadawcy; aplikacja ma dostęp tylko do niej
-MS_TENANT_ID = ""                     # Entra ID → Przegląd → Identyfikator dzierżawy
-MS_CLIENT_ID = ""                     # Rejestracje aplikacji → osemka-www → Identyfikator aplikacji
+MS_TENANT_ID = "0e6415f1-ebec-4c5c-8512-9cb821a0eb6c"   # Entra ID: identyfikator dzierżawy
+MS_CLIENT_ID = "f3883a42-4c86-45e6-b911-d4f34b2d026d"   # aplikacja osemka-www (obiekt SP 7d7f3eb3-1ec0-4dd4-a385-9cd59fb59625)
 
 # Sekret ustawiany poza repozytorium (wkleja go właściciel w terminalu):
 #   npx wrangler pages secret put MS_CLIENT_SECRET --project-name osemka-www
