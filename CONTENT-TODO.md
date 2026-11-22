@@ -20,7 +20,7 @@ Wszystko poniżej jest na stronie jako tekst roboczy. Odhacz po sprawdzeniu.
 
 ## Jacht (`src/pages/jacht.astro`)
 - [x] układ koi (bez zmian po remoncie) i wyposażenie kambuza, wody, prądu, pokładu
-- [ ] lista wyposażenia ratunkowego
+- [x] lista wyposażenia ratunkowego
 - [ ] zdjęcia wnętrza: mesa, kambuz, stanowisko nawigacyjne, kabina
 
 ## Zdjęcia (`src/assets/zdjecia/`, oryginały w OneDrive `8ka-www2026/zdjecia/`)
