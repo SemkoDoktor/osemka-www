@@ -15,7 +15,7 @@ Wszystko poniżej jest na stronie jako tekst roboczy. Odhacz po sprawdzeniu.
 
 ## Kapitan (`src/pages/kapitan.astro`)
 - [x] lista uprawnień: kapitan jachtowy, STCW, nurek ISSA (SRC usunięte)
-- [ ] akweny, po których prowadziłeś rejsy (propozycja z Rejsy_Semko.xlsx czeka na wybór)
+- [x] akweny (wszystkie z Rejsy_Semko.xlsx, zatwierdzone 2026-11-22)
 - [x] zdanie o załogach, które wracają
 
 ## Jacht (`src/pages/jacht.astro`)
