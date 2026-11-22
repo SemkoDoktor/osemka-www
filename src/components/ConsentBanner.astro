@@ -1,0 +1,95 @@
+---
+// Baner zgody na statystyki (Google Analytics przez GTM, Consent Mode v2).
+// Domyślnie wszystko jest odrzucone (skrypt w Base.astro). Wybór zapisujemy
+// w localStorage pod kluczem 'osemka-consent' i można go zmienić z linku w stopce.
+---
+<section class="consent" id="zgoda" aria-labelledby="zgoda-tytul" hidden>
+  <div class="inner">
+    <div>
+      <h2 id="zgoda-tytul">Statystyki strony</h2>
+      <p>Chcemy wiedzieć, które etapy i strony Cię interesują, dlatego prosimy o zgodę na Google Analytics. Bez zgody strona działa tak samo, a my nie zapisujemy plików statystycznych. <a href="/polityka-prywatnosci/#cookies">Więcej w polityce prywatności</a>.</p>
+    </div>
+    <div class="actions">
+      <button type="button" class="btn" data-consent="1">Zgadzam się</button>
+      <button type="button" class="btn btn--ghost" data-consent="0">Nie zgadzam się</button>
+    </div>
+  </div>
+</section>
+
+<script>
+  const KEY = 'osemka-consent';
+  const banner = document.getElementById('zgoda') as HTMLElement | null;
+
+  type Stored = { v: 1; a: boolean; t: string };
+  function read(): Stored | null {
+    try {
+      const raw = localStorage.getItem(KEY);
+      const c = raw ? (JSON.parse(raw) as Stored) : null;
+      return c && c.v === 1 ? c : null;
+    } catch {
+      return null;
+    }
+  }
+
+  function apply(analytics: boolean) {
+    const w = window as unknown as { gtag?: (...args: unknown[]) => void; dataLayer?: unknown[] };
+    w.gtag?.('consent', 'update', { analytics_storage: analytics ? 'granted' : 'denied' });
+    (w.dataLayer ||= []).push({ event: 'consent_update', analytics_consent: analytics });
+  }
+
+  function show() {
+    if (!banner) return;
+    banner.hidden = false;
+    banner.querySelector<HTMLButtonElement>('[data-consent="1"]')?.focus({ preventScroll: true });
+  }
+
+  banner?.querySelectorAll<HTMLButtonElement>('[data-consent]').forEach((b) =>
+    b.addEventListener('click', () => {
+      const analytics = b.dataset.consent === '1';
+      try {
+        localStorage.setItem(KEY, JSON.stringify({ v: 1, a: analytics, t: new Date().toISOString() }));
+      } catch {
+        /* prywatne okno: wybór obowiązuje do końca wizyty */
+      }
+      apply(analytics);
+      banner.hidden = true;
+    }),
+  );
+
+  document.querySelectorAll('[data-consent-open]').forEach((el) =>
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      show();
+    }),
+  );
+
+  if (!read() && banner) banner.hidden = false;
+</script>
+
+<style>
+  .consent {
+    position: fixed;
+    inset: auto 0 0 0;
+    z-index: 20;
+    background: var(--white);
+    border-top: 2px solid var(--ink);
+    box-shadow: 0 -0.5rem 1.5rem rgb(21 39 63 / 0.12);
+  }
+  .consent[hidden] { display: none; }
+  .inner {
+    width: min(100% - 2 * var(--gutter), var(--wide));
+    margin-inline: auto;
+    padding-block: 1.1rem 1.2rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 1rem 2.5rem;
+    align-items: center;
+  }
+  h2 { font-size: var(--step-1); margin: 0 0 0.3rem; }
+  p { font-size: var(--step--1); margin: 0; }
+  .actions { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  @media (max-width: 48rem) {
+    .inner { grid-template-columns: 1fr; }
+    .actions .btn { flex: 1 1 10rem; text-align: center; }
+  }
+</style>
