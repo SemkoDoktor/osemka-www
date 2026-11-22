@@ -19,15 +19,17 @@ export const site = {
 
 export const yacht = {
   name: 'óSemka',
-  design: 'Bruce Roberts 434',
+  design: 'Bruce Roberts 434B',
+  rig: 'kuter',
   year: 1997,
-  hull: 'stal',
+  hull: 'stal, blachy 3–12 mm',
   loa: '13,4 m',
   beam: '4,1 m',
   draught: '2,0 m',
   airDraught: '17 m',
   displacement: '16 t',
   engine: 'Ford Lehmann, 60 KM',
+  fuel: '340 l + kanistry',
   berthsGuests: 6,
 };
 

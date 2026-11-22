@@ -3,6 +3,7 @@
 import { yacht } from '../data/site';
 const rows: [string, string][] = [
   ['Projekt', yacht.design],
+  ['Ożaglowanie', yacht.rig],
   ['Rok budowy', String(yacht.year)],
   ['Kadłub', yacht.hull],
   ['Długość', yacht.loa],
@@ -11,6 +12,7 @@ const rows: [string, string][] = [
   ['Wysokość masztu nad wodą', yacht.airDraught],
   ['Wyporność', yacht.displacement],
   ['Silnik', yacht.engine],
+  ['Paliwo', yacht.fuel],
   ['Koje dla załogi', `${yacht.berthsGuests} + kapitan`],
 ];
 ---
