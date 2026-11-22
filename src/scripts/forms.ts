@@ -1,6 +1,9 @@
-// Wspólna obsługa formularzy: wysyłka w tle, komunikat, zdarzenie dla GA4 (dataLayer).
+// Wspólna obsługa formularzy: wysyłka w tle, komunikat, zdarzenie GA4 (tylko po zgodzie).
 declare global {
-  interface Window { dataLayer?: Record<string, unknown>[] }
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+    osemkaConsent?: boolean;
+  }
 }
 
 const MESSAGES: Record<string, string> = {
@@ -26,7 +29,7 @@ export function wireForms() {
           headers: { Accept: 'application/json' },
         });
         if (!res.ok) throw new Error(String(res.status));
-        (window.dataLayer ||= []).push({ event: form.dataset.event ?? 'form_submit', form: kind });
+        if (window.osemkaConsent) window.gtag?.('event', form.dataset.event ?? 'form_submit', { form_id: form.id || kind });
         form.reset();
         if (msg) { msg.dataset.state = 'ok'; msg.textContent = MESSAGES[kind] ?? MESSAGES.kontakt; }
       } catch {

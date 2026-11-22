@@ -32,29 +32,46 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:locale" content="pl_PL" />
     <meta name="theme-color" content="#15273f" />
     {site.gscVerification && <meta name="google-site-verification" content={site.gscVerification} />}
-    <!-- Consent Mode v2: domyślnie brak zgody; zapisany wybór przywracamy przed startem GTM -->
+    <!-- GA4 + Consent Mode v2: domyślnie brak zgody, skrypt Google ładujemy dopiero po zgodzie -->
+    <script is:inline define:vars={{ gaId: site.ga4Id }}>window.osemkaGaId = gaId;</script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('consent', 'default', {
         ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied',
-        analytics_storage: 'denied', functionality_storage: 'granted', security_storage: 'granted',
-        wait_for_update: 500
+        analytics_storage: 'denied', functionality_storage: 'granted', security_storage: 'granted'
       });
       gtag('set', 'ads_data_redaction', true);
+      window.osemkaAnalytics = function (on) {
+        window.osemkaConsent = !!on;
+        gtag('consent', 'update', { analytics_storage: on ? 'granted' : 'denied' });
+        var id = window.osemkaGaId;
+        if (on && id && !window.osemkaGaLoaded) {
+          window.osemkaGaLoaded = true;
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=' + id;
+          document.head.appendChild(s);
+          gtag('js', new Date());
+          gtag('config', id);
+        }
+        if (!on) {
+          // cofnięcie zgody: usuwamy pliki _ga zapisane wcześniej
+          document.cookie.split(';').forEach(function (c) {
+            var n = c.split('=')[0].trim();
+            if (n.indexOf('_ga') === 0) {
+              ['', '; domain=.osemka.info', '; domain=www.osemka.info'].forEach(function (d) {
+                document.cookie = n + '=; Max-Age=0; path=/' + d;
+              });
+            }
+          });
+        }
+      };
       try {
         var c = JSON.parse(localStorage.getItem('osemka-consent') || 'null');
-        if (c && c.v === 1) gtag('consent', 'update', { analytics_storage: c.a ? 'granted' : 'denied' });
+        if (c && c.v === 1 && c.a) window.osemkaAnalytics(true);
       } catch (e) {}
     </script>
-    {site.gtmId && (
-      <script is:inline define:vars={{ id: site.gtmId }}>
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
-        var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
-        j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer',id);
-      </script>
-    )}
   </head>
   <body>
     <a class="skip visually-hidden" href="#tresc">Przejdź do treści</a>

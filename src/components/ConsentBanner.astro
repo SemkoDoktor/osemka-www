@@ -32,9 +32,8 @@
   }
 
   function apply(analytics: boolean) {
-    const w = window as unknown as { gtag?: (...args: unknown[]) => void; dataLayer?: unknown[] };
-    w.gtag?.('consent', 'update', { analytics_storage: analytics ? 'granted' : 'denied' });
-    (w.dataLayer ||= []).push({ event: 'consent_update', analytics_consent: analytics });
+    // osemkaAnalytics jest zdefiniowane w Base.astro: zgoda, ładowanie GA4, usuwanie _ga
+    (window as unknown as { osemkaAnalytics?: (on: boolean) => void }).osemkaAnalytics?.(analytics);
   }
 
   function show() {
