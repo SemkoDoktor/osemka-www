@@ -7,11 +7,13 @@ compatibility_date = "2026-11-01"
 [vars]
 SITE_URL = "https://www.osemka.info"
 OWNER_EMAIL = "kapitan@osemka.info"   # tu przychodzą zapytania ze strony
-BREVO_LIST_ID = ""                    # uzupełnimy po założeniu konta Brevo
-BREVO_DOI_TEMPLATE_ID = ""            # szablon maila potwierdzającego zapis
+# Wysyłka maili przez Microsoft 365 (Graph API, aplikacja w Entra ID).
+MAIL_FROM = "kapitan@osemka.info"     # skrzynka nadawcy; aplikacja ma dostęp tylko do niej
+MS_TENANT_ID = ""                     # Entra ID → Przegląd → Identyfikator dzierżawy
+MS_CLIENT_ID = ""                     # Rejestracje aplikacji → osemka-www → Identyfikator aplikacji
 
-# Sekret ustawiany poza repozytorium:
-#   npx wrangler pages secret put BREVO_API_KEY --project-name osemka-www
+# Sekret ustawiany poza repozytorium (wkleja go właściciel w terminalu):
+#   npx wrangler pages secret put MS_CLIENT_SECRET --project-name osemka-www
 
 [[d1_databases]]
 binding = "DB"

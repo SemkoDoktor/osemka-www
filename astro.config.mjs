@@ -5,5 +5,6 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://www.osemka.info',
   trailingSlash: 'always',
-  integrations: [sitemap()],
+  // strony techniczne newslettera nie trafiają do mapy strony
+  integrations: [sitemap({ filter: (page) => !page.includes('/newsletter/') })],
 });

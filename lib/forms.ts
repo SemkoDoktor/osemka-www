@@ -1,12 +1,11 @@
 // Wspólne narzędzia dla funkcji formularzy (Cloudflare Pages Functions).
 
-export interface Env {
+import { type MailEnv, sendMail, layout, escapeHtml } from './mail';
+
+export interface Env extends MailEnv {
   DB: D1Database;
   SITE_URL: string;
   OWNER_EMAIL: string;
-  BREVO_API_KEY?: string;
-  BREVO_LIST_ID?: string;
-  BREVO_DOI_TEMPLATE_ID?: string;
 }
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -28,42 +27,15 @@ export async function readForm(request: Request) {
 
 export const isEmail = (v: string) => EMAIL_RE.test(v) && v.length <= 254;
 
-/** Wysyła mail transakcyjny przez Brevo. Bez klucza API po prostu nic nie robi. */
+/** Powiadomienie dla kapitana o nowym zgłoszeniu. „Odpowiedz” trafia do nadawcy formularza. */
 export async function notifyOwner(env: Env, subject: string, lines: Record<string, string>) {
-  if (!env.BREVO_API_KEY) return;
-  const html = Object.entries(lines)
-    .map(([k, v]) => `<p><strong>${escapeHtml(k)}:</strong> ${escapeHtml(v || '–')}</p>`)
+  const rows = Object.entries(lines)
+    .map(([k, v]) => `<p style="margin:0 0 10px"><strong>${escapeHtml(k)}:</strong><br>${escapeHtml(v || '–').replace(/\n/g, '<br>')}</p>`)
     .join('');
-  const res = await fetch('https://api.brevo.com/v3/smtp/email', {
-    method: 'POST',
-    headers: { 'api-key': env.BREVO_API_KEY, 'content-type': 'application/json' },
-    body: JSON.stringify({
-      sender: { name: 'Strona óSemka', email: env.OWNER_EMAIL },
-      to: [{ email: env.OWNER_EMAIL }],
-      replyTo: lines['E-mail'] ? { email: lines['E-mail'] } : undefined,
-      subject,
-      htmlContent: html,
-    }),
+  await sendMail(env, {
+    to: env.OWNER_EMAIL,
+    subject,
+    replyTo: lines['E-mail'] && isEmail(lines['E-mail']) ? lines['E-mail'] : undefined,
+    html: layout(subject, rows),
   });
-  if (!res.ok) console.error('Brevo smtp error', res.status, await res.text());
-}
-
-/** Zapis z podwójną zgodą: Brevo wysyła mail z linkiem potwierdzającym. */
-export async function brevoDoubleOptIn(env: Env, email: string) {
-  if (!env.BREVO_API_KEY || !env.BREVO_LIST_ID || !env.BREVO_DOI_TEMPLATE_ID) return;
-  const res = await fetch('https://api.brevo.com/v3/contacts/doubleOptinConfirmation', {
-    method: 'POST',
-    headers: { 'api-key': env.BREVO_API_KEY, 'content-type': 'application/json' },
-    body: JSON.stringify({
-      email,
-      includeListIds: [Number(env.BREVO_LIST_ID)],
-      templateId: Number(env.BREVO_DOI_TEMPLATE_ID),
-      redirectionUrl: `${env.SITE_URL}/newsletter/potwierdzony/`,
-    }),
-  });
-  if (!res.ok) console.error('Brevo DOI error', res.status, await res.text());
-}
-
-function escapeHtml(s: string) {
-  return s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
 }

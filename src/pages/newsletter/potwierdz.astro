@@ -1,0 +1,26 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base title="Potwierdź zapis" description="Potwierdzenie zapisu do newslettera Dziennik pokładowy.">
+  <section class="wrap page">
+    <h1>Jeszcze jedno kliknięcie</h1>
+    <p class="lead">Potwierdź, że chcesz dostawać Dziennik pokładowy: raz w miesiącu nowe etapy wyprawy, relacje z rejsów i pierwszeństwo zapisów.</p>
+    <form method="post" action="/api/newsletter/potwierdz/" id="potwierdz">
+      <input type="hidden" name="t" />
+      <button type="submit" class="btn">Potwierdzam zapis</button>
+    </form>
+    <p class="muted small">Wypisać się możesz w każdej chwili, odpowiadając na dowolny Dziennik albo pisząc na kapitan@osemka.info.</p>
+  </section>
+</Base>
+
+<script>
+  const t = new URLSearchParams(location.search).get('t') ?? '';
+  const input = document.querySelector<HTMLInputElement>('#potwierdz input[name="t"]');
+  if (input) input.value = t;
+</script>
+
+<style>
+  .page { padding-block: clamp(3rem, 10vw, 7rem); }
+  form { margin-block: 1.5rem; }
+  .small { font-size: var(--step--1); }
+</style>
