@@ -10,7 +10,7 @@ export const site = {
   nip: '529-146-55-73',
   homePort: 'Hel',
   // Google Tag Manager: jedyny skrypt Google na stronie, ładowany dopiero po zgodzie w banerze.
-  // GA4 (G-XHGXQ8NWFT, strumień 16392022514) jest skonfigurowane w GTM, nie tutaj.
+  // GA4 (G-NELX1771XG, strumień 16391966248) jest skonfigurowane w GTM, nie tutaj.
   // Pusty = brak skryptów Google.
   gtmId: 'GTM-534T7LTV',
   // Search Console: kod z metatagu weryfikacyjnego (tylko gdy nie weryfikujemy przez DNS).
