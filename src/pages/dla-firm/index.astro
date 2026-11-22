@@ -1,6 +1,8 @@
 ---
 import Base from '../../layouts/Base.astro';
 import LeadForm from '../../components/LeadForm.astro';
+import Photo from '../../components/Photo.astro';
+import dziob from '../../assets/zdjecia/osemka-dziob.jpg';
 ---
 <Base title="Rejs dla zarządu" description="Wachta Zarządu: trzy dni na Bałtyku dla zespołu do sześciu osób, z kapitanem i coachem biznesowym. Raport z planem działań i spotkanie po 30 dniach.">
   <section class="wrap hero">
@@ -9,7 +11,8 @@ import LeadForm from '../../components/LeadForm.astro';
       <p class="lead">Trzy dni na Bałtyku dla zespołu do sześciu osób. Prowadzicie jacht sami, decydujecie razem i od razu widzicie skutki tych decyzji.</p>
       <a class="btn" href="#zapytanie">Zapytaj o termin</a>
     </div>
-    <div class="photo-slot" style="--ratio: 4 / 5">Zdjęcie: zespół przy sterze, nocna wachta</div>
+    <Photo src={dziob} ratio="4 / 5" position="72% center" eager sizes="(max-width: 56rem) 100vw, 35vw"
+      alt="Dziób óSemki z napisem na burcie, zacumowany cumami do drewnianego pomostu w słoneczny dzień" />
   </section>
 
   <section class="section section--land">

@@ -1,9 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
+import Photo from '../components/Photo.astro';
+import kapitan from '../assets/zdjecia/kapitan-ster.jpg';
 ---
 <Base title="Kapitan" description="Semko, kapitan óSemki: żeglarz od liceum, motocyklista, informatyk. Uprawnienia kapitańskie, wieloletnie rejsy po Bałtyku, Morzu Śródziemnym i Karaibach.">
   <section class="wrap hero">
-    <div class="photo-slot" style="--ratio: 4 / 5">Zdjęcie: kapitan przy sterze óSemki</div>
+    <Photo class="portrait" src={kapitan} ratio="4 / 5" position="center 30%" eager sizes="(max-width: 56rem) 24rem, 30vw"
+      alt="Kapitan Semko przy sterze, w czapce, okularach i kamizelce ratunkowej, obok polska bandera" />
     <div>
       <h1>Semko</h1>
       <p class="lead">Żegluję od liceum. Na co dzień pracuję w IT, gdzie od lat prowadzę zespoły i projekty. óSemka łączy jedno i drugie.</p>
@@ -40,5 +43,5 @@ import Base from '../layouts/Base.astro';
   }
   .cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(2rem, 5vw, 4.5rem); }
   .list { padding-left: 1.2rem; margin: 0 0 1rem; }
-  @media (max-width: 56rem) { .hero, .cols { grid-template-columns: 1fr; } .hero .photo-slot { max-width: 24rem; } }
+  @media (max-width: 56rem) { .hero, .cols { grid-template-columns: 1fr; } .hero :global(.portrait) { max-width: 24rem; } }
 </style>

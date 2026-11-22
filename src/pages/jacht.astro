@@ -1,6 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
 import Cartouche from '../components/Cartouche.astro';
+import Photo from '../components/Photo.astro';
+import marina from '../assets/zdjecia/osemka-marina.jpg';
+import burta from '../assets/zdjecia/osemka-burta.jpg';
+import zima from '../assets/zdjecia/osemka-zima.jpg';
+import piecyk from '../assets/zdjecia/osemka-piecyk.jpg';
 ---
 <Base title="Jacht" description="óSemka: stalowy jacht oceaniczny Bruce Roberts 434, 13,4 m, 16 ton. Sześć koi dla załogi, zbudowany do żeglugi w wysokich szerokościach.">
   <section class="wrap hero">
@@ -14,10 +19,12 @@ import Cartouche from '../components/Cartouche.astro';
 
   <section class="section section--shoal">
     <div class="wrap gallery">
-      <div class="photo-slot" style="--ratio: 3 / 2">Zdjęcie: óSemka pod pełnymi żaglami</div>
-      <div class="photo-slot" style="--ratio: 3 / 2">Zdjęcie: kokpit i ster</div>
-      <div class="photo-slot" style="--ratio: 3 / 2">Zdjęcie: mesa</div>
-      <div class="photo-slot" style="--ratio: 3 / 2">Zdjęcie: stanowisko nawigacyjne</div>
+      <Photo class="wide" src={marina} ratio="16 / 9" sizes="(max-width: 76rem) 100vw, 76rem"
+        alt="óSemka, granatowy stalowy jacht z białym napisem na burcie, przy kei w porannym słońcu, odbita w spokojnej wodzie" />
+      <Photo src={burta} ratio="3 / 2" position="30% center"
+        alt="Nazwa óSemka na granatowej burcie, obok cumy i odbijacz" caption="Stalowa burta i cumy przy kei" />
+      <Photo src={zima} ratio="3 / 2"
+        alt="óSemka zimą przy zaśnieżonym pomoście, na burcie numer POL 13636" caption="Zimą przy pomoście: stal nie boi się chłodu" />
     </div>
   </section>
 
@@ -26,9 +33,23 @@ import Cartouche from '../components/Cartouche.astro';
       <div>
         <h2>Pod pokładem</h2>
         <p>Kabina dziobowa, kabina rufowa i mesa z kojami dają sześć miejsc dla załogi i osobne miejsce dla kapitana. Są dwie toalety, kambuz z kuchenką i piekarnikiem oraz stanowisko nawigacyjne.</p>
-        <p class="muted">Dokładny układ koi i wyposażenia opiszemy po aktualizacji zdjęć wnętrza.</p>
+        <p>Na wyprawie mieszkasz na jachcie, więc óSemka ma to, czego potrzeba do życia przez tydzień i dłużej z dala od mariny:</p>
+        <dl class="kit">
+          <div><dt>Kambuz</dt><dd>kuchenka gazowa z piekarnikiem, lodówka, ekspres do kawy</dd></div>
+          <div><dt>Woda</dt><dd>odsalarka (watermaker), bojler z ciepłą wodą, prysznic</dd></div>
+          <div><dt>Prąd i ciepło</dt><dd>agregat, oświetlenie LED, kominek na olej napędowy</dd></div>
+          <div><dt>Pranie</dt><dd>pralka na pokładzie</dd></div>
+        </dl>
+        <Photo class="stove" src={piecyk} ratio="4 / 5" sizes="(max-width: 56rem) 80vw, 20rem"
+          alt="Płomień w kominku na olej napędowy pod pokładem óSemki" caption="Kominek na olej napędowy: ciepło także w chłodne noce" />
       </div>
       <div>
+        <h2>Na pokładzie</h2>
+        <dl class="kit">
+          <div><dt>Sterowanie</dt><dd>samoster wiatrowy, który trzyma kurs bez prądu</dd></div>
+          <div><dt>Noc</dt><dd>oświetlenie pokładu</dd></div>
+          <div><dt>Na kotwicy</dt><dd>ponton z dwoma silnikami, deska SUP i materac do holowania za pontonem</dd></div>
+        </dl>
         <h2>Bezpieczeństwo</h2>
         <p>Przed każdym etapem przechodzisz odprawę: kamizelki i szelki, praca na pokładzie, człowiek za burtą, łączność. Na wachcie nocnej zawsze obowiązują szelki i lifeline.</p>
         <p class="muted">Lista wyposażenia ratunkowego zostanie uzupełniona przed otwarciem zapisów.</p>
@@ -45,7 +66,14 @@ import Cartouche from '../components/Cartouche.astro';
     align-items: start;
     padding-block: clamp(2rem, 6vw, 4.5rem);
   }
-  .gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+  .gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem 1rem; }
+  .gallery :global(.wide) { grid-column: 1 / -1; }
+  :global(.stove) { max-width: 20rem; margin-top: 1.5rem; }
+  .kit { margin: 0 0 2rem; display: grid; gap: 0.1rem; }
+  .kit div { display: grid; grid-template-columns: 8.5rem 1fr; gap: 1rem; padding-block: 0.45rem; border-bottom: 1px dotted var(--rule); }
+  .kit dt { color: var(--steel); font-size: var(--step--1); padding-top: 0.15rem; }
+  .kit dd { margin: 0; font-size: 1rem; }
+  @media (max-width: 30rem) { .kit div { grid-template-columns: 1fr; gap: 0; } }
   .cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(2rem, 5vw, 4.5rem); }
   @media (max-width: 56rem) { .hero, .cols { grid-template-columns: 1fr; } }
   @media (max-width: 36rem) { .gallery { grid-template-columns: 1fr; } }

@@ -15,18 +15,21 @@ Wszystko poniżej jest na stronie jako tekst roboczy. Odhacz po sprawdzeniu.
 
 ## Kapitan (`src/pages/kapitan.astro`)
 - [x] lista uprawnień: kapitan jachtowy, STCW, nurek ISSA (SRC usunięte)
-- [ ] akweny, po których prowadziłeś rejsy
-- [ ] zdanie o załogach, które wracają
+- [ ] akweny, po których prowadziłeś rejsy (propozycja z Rejsy_Semko.xlsx czeka na wybór)
+- [x] zdanie o załogach, które wracają
 
 ## Jacht (`src/pages/jacht.astro`)
-- [ ] układ koi i wyposażenie kambuza
+- [x] układ koi (bez zmian po remoncie) i wyposażenie kambuza, wody, prądu, pokładu
 - [ ] lista wyposażenia ratunkowego
+- [ ] zdjęcia wnętrza: mesa, kambuz, stanowisko nawigacyjne, kabina
 
-## Zdjęcia (miejsca w kratkę na stronie)
+## Zdjęcia (`src/assets/zdjecia/`, oryginały w OneDrive `8ka-www2026/zdjecia/`)
+- [x] óSemka przy kei (Jacht), burta, zima, kominek
+- [x] kapitan przy sterze (Kapitan)
+- [x] dziób przy pomoście (Dla firm, tymczasowo zamiast zespołu przy sterze)
 - [ ] óSemka pod żaglami (min. 2400 px szerokości)
 - [ ] kokpit i ster, mesa, stanowisko nawigacyjne
-- [ ] kapitan przy sterze (pionowe)
-- [ ] zespół przy sterze / nocna wachta (do strony dla firm)
+- [ ] zespół przy sterze / nocna wachta (do strony dla firm, za zgodą osób na zdjęciu)
 
 ## Prawne
 - [x] polityka prywatności – zweryfikowana (potwierdzenie właściciela 2026-11-22)
