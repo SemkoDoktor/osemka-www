@@ -1,7 +1,7 @@
 // Wspólna obsługa formularzy: wysyłka w tle, komunikat, zdarzenie GA4 (tylko po zgodzie).
 declare global {
   interface Window {
-    gtag?: (...args: unknown[]) => void;
+    dataLayer?: unknown[];
     osemkaConsent?: boolean;
   }
 }
@@ -29,7 +29,8 @@ export function wireForms() {
           headers: { Accept: 'application/json' },
         });
         if (!res.ok) throw new Error(String(res.status));
-        if (window.osemkaConsent) window.gtag?.('event', form.dataset.event ?? 'form_submit', { form_id: form.id || kind });
+        // GTM przekazuje to zdarzenie do GA4 (tag „GA4 – formularze”)
+        if (window.osemkaConsent) (window.dataLayer ||= []).push({ event: form.dataset.event ?? 'form_submit', form_id: form.id || kind });
         form.reset();
         if (msg) { msg.dataset.state = 'ok'; msg.textContent = MESSAGES[kind] ?? MESSAGES.kontakt; }
       } catch {

@@ -9,9 +9,10 @@ export const site = {
   company: 'óSemka Semko Doktór', // nazwa z CEIDG
   nip: '529-146-55-73',
   homePort: 'Hel',
-  // Google Analytics 4: identyfikator pomiaru (strumień 16392022514).
-  // Skrypt Google ładuje się dopiero po zgodzie w banerze. Pusty = brak skryptów Google.
-  ga4Id: 'G-XHGXQ8NWFT',
+  // Google Tag Manager: jedyny skrypt Google na stronie, ładowany dopiero po zgodzie w banerze.
+  // GA4 (G-XHGXQ8NWFT, strumień 16392022514) jest skonfigurowane w GTM, nie tutaj.
+  // Pusty = brak skryptów Google.
+  gtmId: 'GTM-534T7LTV',
   // Search Console: kod z metatagu weryfikacyjnego (tylko gdy nie weryfikujemy przez DNS).
   gscVerification: '',
 };

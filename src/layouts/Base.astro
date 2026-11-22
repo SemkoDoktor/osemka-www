@@ -32,8 +32,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:locale" content="pl_PL" />
     <meta name="theme-color" content="#15273f" />
     {site.gscVerification && <meta name="google-site-verification" content={site.gscVerification} />}
-    <!-- GA4 + Consent Mode v2: domyślnie brak zgody, skrypt Google ładujemy dopiero po zgodzie -->
-    <script is:inline define:vars={{ gaId: site.ga4Id }}>window.osemkaGaId = gaId;</script>
+    <!-- GTM + Consent Mode v2: domyślnie brak zgody, GTM ładujemy dopiero po zgodzie -->
+    <script is:inline define:vars={{ gtmId: site.gtmId }}>window.osemkaGtmId = gtmId;</script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -45,15 +45,14 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
       window.osemkaAnalytics = function (on) {
         window.osemkaConsent = !!on;
         gtag('consent', 'update', { analytics_storage: on ? 'granted' : 'denied' });
-        var id = window.osemkaGaId;
-        if (on && id && !window.osemkaGaLoaded) {
-          window.osemkaGaLoaded = true;
+        var id = window.osemkaGtmId;
+        if (on && id && !window.osemkaGtmLoaded) {
+          window.osemkaGtmLoaded = true;
+          dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
           var s = document.createElement('script');
           s.async = true;
-          s.src = 'https://www.googletagmanager.com/gtag/js?id=' + id;
+          s.src = 'https://www.googletagmanager.com/gtm.js?id=' + id;
           document.head.appendChild(s);
-          gtag('js', new Date());
-          gtag('config', id);
         }
         if (!on) {
           // cofnięcie zgody: usuwamy pliki _ga zapisane wcześniej

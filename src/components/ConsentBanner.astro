@@ -32,7 +32,7 @@
   }
 
   function apply(analytics: boolean) {
-    // osemkaAnalytics jest zdefiniowane w Base.astro: zgoda, ładowanie GA4, usuwanie _ga
+    // osemkaAnalytics jest zdefiniowane w Base.astro: zgoda, ładowanie GTM, usuwanie _ga
     (window as unknown as { osemkaAnalytics?: (on: boolean) => void }).osemkaAnalytics?.(analytics);
   }
 
