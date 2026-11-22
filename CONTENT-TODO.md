@@ -29,5 +29,5 @@ Wszystko poniżej jest na stronie jako tekst roboczy. Odhacz po sprawdzeniu.
 - [ ] zespół przy sterze / nocna wachta (do strony dla firm)
 
 ## Prawne
-- [ ] polityka prywatności – weryfikacja przez prawnika
-- [ ] opinia prawna: impreza turystyczna / jacht komercyjny (przed Fazą 2)
+- [x] polityka prywatności – zweryfikowana (potwierdzenie właściciela 2026-11-22)
+- [x] opinia prawna: impreza turystyczna / jacht komercyjny (potwierdzona 2026-11-22)

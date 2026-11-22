@@ -5,7 +5,6 @@ import { site } from '../data/site';
 <Base title="Polityka prywatności" description="Jak óSemka przetwarza dane osobowe i pliki cookies.">
   <article class="wrap prose page">
     <h1>Polityka prywatności</h1>
-    <p class="note">Wersja robocza do weryfikacji przez prawnika przed publikacją.</p>
 
     <h2>Administrator</h2>
     <p>Administratorem Twoich danych jest {site.company}{site.nip && `, NIP ${site.nip}`}. Kontakt: <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
@@ -34,5 +33,4 @@ import { site } from '../data/site';
 <style>
   .page { padding-block: clamp(2rem, 6vw, 4.5rem); }
   .page h2 { font-size: var(--step-2); margin-top: 1.6em; }
-  .note { background: var(--land); padding: 0.7rem 1rem; font-size: var(--step--1); }
 </style>
